@@ -27,6 +27,27 @@ describe("<App/> shallow rendering", () => {
     const tree = shallow(<App />)
     expect(toJson(tree)).toMatchSnapshot()
   })
+  it('updates className with new State', ()=>{
+    const wrapper = shallow(<App/>)
+    expect(wrapper.find('.blue').length).toBe(1)
+    expect(wrapper.find('.red').length).toBe(0)
+    wrapper.setState({mainColor: 'red'})
+    expect(wrapper.find('.blue').length).toBe(0)
+    expect(wrapper.find('.red').length).toBe(1)
+  })
+  it('calls componentDidMoutn, updates p title', () =>{
+    jest.spyOn(App.prototype, 'componentDidMount')
+    const wrapper = shallow(<App/>)
+    expect(App.prototype.componentDidMount.mock.calls.length).toBe(1)
+    expect(wrapper.find('.lifeCycle').text()).toBe('componentDidMount')
+  })
+  it('setProps calls componentWillReceiveProps', () => {
+    jest.spyOn(App.prototype, 'componentWillReceiveProps')
+    const wrapper = shallow(<App/>)
+    wrapper.setProps({hide:true})
+    expect(App.prototype.componentWillReceiveProps.mock.calls.length).toBe(1)
+    expect(wrapper.find('.lifeCycle').text()).toBe('componentWillReceiveProps')
+  })
   it('on button click changes p text', () =>{
     const wrapper = shallow(<App/>)
     const button = wrapper.find('button')
@@ -40,6 +61,14 @@ describe("<App/> shallow rendering", () => {
     expect(wrapper.find('h2').text()).toBe('')
     input.simulate('change', {currentTarget: {value:'Tyler'}})
     expect(wrapper.find('h2').text()).toBe('Tyler')
+  })
+  it('handleString function return correctly', () => {
+    const wrapper = shallow(<App/>)
+    const trueReturn = wrapper.instance().handleStrings('Hello World')
+    const falseReturn = wrapper.instance().handleStrings('')
+    expect(trueReturn).toBe(true)
+    expect(falseReturn).toBe(false)
+
   })
 })
 

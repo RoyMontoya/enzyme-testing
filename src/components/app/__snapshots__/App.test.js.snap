@@ -17,6 +17,11 @@ exports[`<App/> shallow rendering matches the snapshot 1`] = `
     >
       Welcome to React
     </h1>
+    <h3
+      className="blue"
+    >
+      Everyone is Welcome!
+    </h3>
   </header>
   <Title
     text="some title"
@@ -45,6 +50,11 @@ exports[`<App/> shallow rendering matches the snapshot 1`] = `
     onChange={[Function]}
     type="text"
   />
+  <p
+    className="lifeCycle"
+  >
+    componentDidMount
+  </p>
 </div>
 `;
 
@@ -65,6 +75,11 @@ exports[`<App/> shallow rendering matches the snapshot 2`] = `
     >
       Welcome to React
     </h1>
+    <h3
+      className="blue"
+    >
+      Everyone is Welcome!
+    </h3>
   </header>
   <Title
     text="some title"
@@ -93,5 +108,10 @@ exports[`<App/> shallow rendering matches the snapshot 2`] = `
     onChange={[Function]}
     type="text"
   />
+  <p
+    className="lifeCycle"
+  >
+    componentDidMount
+  </p>
 </div>
 `;

@@ -6,7 +6,22 @@ const Title = ({text}) => <div>{text}</div>
 
 class App extends Component {
   state = {on: false,
-            input: ''}
+            input: '',
+            mainColor: 'blue',
+            lifeCycle:''
+          }
+
+componentDidMount(){
+  this.setState({lifeCycle: 'componentDidMount'})
+}
+
+componentWillReceiveProps(){
+  this.setState({lifeCycle: 'componentWillReceiveProps'})
+}
+
+handleStrings(str){
+  return str === 'Hello World' ? true : false
+}
 
   render() {
     return (
@@ -14,6 +29,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
+          <h3 className={this.state.mainColor}>Everyone is Welcome!</h3>
         </header>
         <Title text="some title"/>
         <p className="App-intro">
@@ -23,6 +39,7 @@ class App extends Component {
         <h2>{this.state.input}</h2>
         <input onChange={(e) => this.setState({input: e.currentTarget.value})}
           type='text'/>
+        <p className='lifeCycle'>{this.state.lifeCycle}</p>
       </div>
     );
   }
